@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Countdown to Monday 8pm</title>
+	<script>
+		// Define the target day and time
+		var targetDay = 1; // 0 = Sunday, 1 = Monday, etc.
+		var targetHour = 20; // 24-hour format
+
+		// Function to update the countdown
+		function updateCountdown() {
+			// Get the current date and time
+			var now = new Date();
+
+			// Calculate the time until the target day and time
+			var daysToTarget = (targetDay - now.getDay() + 7) % 7;
+			var timeToTarget = (daysToTarget * 24 + targetHour - now.getHours()) * 60 * 60 -
+			                   now.getMinutes() * 60 - now.getSeconds();
+
+			// Update the HTML elements
+			document.getElementById("days").innerHTML = Math.floor(timeToTarget / (24 * 60 * 60));
+			document.getElementById("hours").innerHTML = Math.floor((timeToTarget % (24 * 60 * 60)) / (60 * 60));
+			document.getElementById("minutes").innerHTML = Math.floor((timeToTarget % (60 * 60)) / 60);
+			document.getElementById("seconds").innerHTML = Math.floor(timeToTarget % 60);
+		}
+
+		// Update the countdown every second
+		setInterval(updateCountdown, 1000);
+	</script>
+</head>
+<body>
+	<h1>Countdown to Monday 8pm</h1>
+	<p>Time until Monday 8pm:</p>
+	<p><span id="days"></span> days <span id="hours"></span> hours <span id="minutes"></span> minutes <span id="seconds"></span> seconds</p>
+</body>
+</html>
